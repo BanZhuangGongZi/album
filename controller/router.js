@@ -50,7 +50,7 @@ exports.checkToken = function (req, res, next) {
             if (err) {
                 return next(err)
             }
-            console.log(rawXML);
+            // console.log(rawXML);
             var message = XmlParse.parse(rawXML);
             if (message.Content == "2") {
                 res.set("Content-Type", "text/xml");
