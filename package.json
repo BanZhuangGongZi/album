@@ -11,6 +11,7 @@
   "dependencies": {
     "ejs": "^2.4.2",
     "express": "^4.14.0",
-    "formidable": "^1.0.17"
+    "formidable": "^1.0.17",
+    "sha1": "^1.1.1"
   }
 }
