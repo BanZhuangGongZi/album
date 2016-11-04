@@ -32,11 +32,10 @@ exports.checkToken=function (req,res,next) {
     if (req.method == "GET") {
         if (checkStr == signature) {
             console.log("echostr:" + echostr);
-            req.send(echostr);
-            req.end();
+            res.send(echostr);
+            res.end();
         } else {
             console.log("check wechat token failed in GET.");
         }
     }
-    next();
 }
