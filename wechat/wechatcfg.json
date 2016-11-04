@@ -1,7 +1,7 @@
 {
-   "port": 80,
-   "appID": "wx22da16c6834f6b96",
-   "appSecret": "09d6a6decbb5621444230c6f6e2f3714",
-   "baseUrl": "http://115.159.46.201",
-   "token": "001f9a2b7f5ad49f6194ca150f97cb3q"
+    "port": 80,
+    "appID": "wx287bda39daf6394a",
+    "appSecret": "a304480b5fc160a5611f905338b517d1",
+    "baseUrl": "http://115.159.46.201",
+    "token": "001f9a2b7f5ad49f6194ca150f97cb3q"
 }
