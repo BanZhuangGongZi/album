@@ -19,7 +19,7 @@ exports.showAlbums = function (req, res,next) {
             "images":images
         })
     },next);
-}
+};
 
 exports.checkToken=function (req,res,next) {
     var token = wechatCfg.token;
@@ -38,4 +38,4 @@ exports.checkToken=function (req,res,next) {
             console.log("check wechat token failed in GET.");
         }
     }
-}
+};
