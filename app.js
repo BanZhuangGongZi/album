@@ -18,8 +18,9 @@ app.use(express.static('./uploads'));
 app.get('/', router.showIndex);
 app.get('/:albumsName', router.showAlbums);
 app.get('/wechat/check-token', router.checkToken);
+app.post('/wechat/check-token', router.checkToken);
 //最后的中间件404页面
 app.use(function (req, res) {
     res.render("err");
 });
-app.listen(80);
+app.listen(8083);

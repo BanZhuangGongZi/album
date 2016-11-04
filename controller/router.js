@@ -3,6 +3,8 @@
  */
 var sha1 = require("sha1");
 var XmlParse = require("pixl-xml");
+var getRawBody = require('raw-body');
+var typer = require('media-typer')
 var wechatCfg = require("./../wechat/wechatcfg.json");
 var file = require("../models/file");
 exports.showIndex = function (req, res) {
@@ -40,20 +42,29 @@ exports.checkToken = function (req, res, next) {
         }
     }
     if (req.method == "POST") {
-        console.log(req.rawXML);
-        var message = XmlParse.parse(req.rawXML);
-        if (message.Content == "1") {
-            res.set("Content-Type", "text/xml");
-            res.send(`<xml>
+        getRawBody(req, {
+            length: req.headers['content-length'],
+            limit: '1mb',
+            encoding: typer.parse(req.headers['content-type']).parameters.charset
+        }, function (err, rawXML) {
+            if (err) {
+                return next(err)
+            }
+            console.log(rawXML);
+            var message = XmlParse.parse(rawXML);
+            if (message.Content == "2") {
+                res.set("Content-Type", "text/xml");
+                res.send(`<xml>
                 <ToUserName><![CDATA[${ message.FromUserName}]]></ToUserName>
                 <FromUserName><![CDATA[${ message.ToUserName}]]></FromUserName>
                 <CreateTime>${ Date.now()}</CreateTime>
                 <MsgType><![CDATA[text]]></MsgType>
                 <Content><![CDATA[你很2吗？]]></Content>
         </xml>`);
-        } else {
-            res.set("Content-Type", "text/xml");
-            res.send(`success`);
-        }
+            } else {
+                res.set("Content-Type", "text/xml");
+                res.send(`success`);
+            }
+        })
     }
 };
