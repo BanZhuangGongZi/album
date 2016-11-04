@@ -1,6 +1,6 @@
 var express=require('express');
 var app=express();
-var router=require('./controller');
+var router=require('./controller/router.js');
 //设置模板引擎--ejs
 console.log(__dirname);
 app.set('view engine','ejs');
