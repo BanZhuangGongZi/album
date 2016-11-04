@@ -15,4 +15,4 @@ app.get('/wechat/check-token',router.checkToken);
 app.use(function (req,res) {
 res.render("err");
 });
-app.listen(3000);
+app.listen(80);
