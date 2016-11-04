@@ -2,8 +2,9 @@
  * Created by huangk on 7/14/2016.
  */
 var sha1 = require("sha1");
+var XmlParse = require("pixl-xml");
 var wechatCfg = require("./../wechat/wechatcfg.json");
-var file=require("../models/file");
+var file = require("../models/file");
 exports.showIndex = function (req, res) {
     file.getAllAlbums(function (albums) {
         res.render('index', {
@@ -11,17 +12,17 @@ exports.showIndex = function (req, res) {
         })
     })
 };
-exports.showAlbums = function (req, res,next) {
-    var albumName=req.params.albumsName;
-    file.getAllImagesByAlbumName(albumName,function (images) {
+exports.showAlbums = function (req, res, next) {
+    var albumName = req.params.albumsName;
+    file.getAllImagesByAlbumName(albumName, function (images) {
         res.render('album', {
             "albumname": albumName,
-            "images":images
+            "images": images
         })
-    },next);
+    }, next);
 };
 
-exports.checkToken=function (req,res,next) {
+exports.checkToken = function (req, res, next) {
     var token = wechatCfg.token;
     var signature = req.query.signature;
     var nonce = req.query.nonce;
@@ -36,6 +37,23 @@ exports.checkToken=function (req,res,next) {
             res.end();
         } else {
             console.log("check wechat token failed in GET.");
+        }
+    }
+    if (req.method == "POST") {
+        console.log(req.rawXML);
+        var message = XmlParse.parse(req.rawXML);
+        if (message.Content == "1") {
+            res.set("Content-Type", "text/xml");
+            res.send(`<xml>
+                <ToUserName><![CDATA[${ message.FromUserName}]]></ToUserName>
+                <FromUserName><![CDATA[${ message.ToUserName}]]></FromUserName>
+                <CreateTime>${ Date.now()}</CreateTime>
+                <MsgType><![CDATA[text]]></MsgType>
+                <Content><![CDATA[你很2吗？]]></Content>
+        </xml>`);
+        } else {
+            res.set("Content-Type", "text/xml");
+            res.send(`success`);
         }
     }
 };
