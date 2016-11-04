@@ -2,7 +2,7 @@
  * Created by huangk on 7/14/2016.
  */
 var sha1 = require("sha1");
-var wechatCfg = require("./wechatcfg.json");
+var wechatCfg = require("./../wechatcfg.json");
 var file=require("../models/file");
 exports.showIndex = function (req, res) {
     file.getAllAlbums(function (albums) {
