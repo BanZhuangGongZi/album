@@ -27,8 +27,9 @@ module.exports = {
             'key': 'movie_cartoon'
         }]
     }, {
-        'name': '帮助',
-        'type': 'click',
-        'key': 'help'
+        'name': '相册',
+        'type': 'view',
+        'url': 'http://115.159.46.201/',
+        'key':'album'
     }]
 };
